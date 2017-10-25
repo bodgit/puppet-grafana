@@ -72,7 +72,9 @@ class grafana::config {
         content => template("${module_name}/sysconfig.erb"),
       }
     }
-    default: {}
+    default: {
+      # noop
+    }
   }
 
   Grafana_ini_setting {
@@ -85,6 +87,8 @@ class grafana::config {
 
   $config = delete_undef_values({
     'analytics/check_for_updates' => $::grafana::check_for_updates,
+    'database/max_idle_conn'      => $::grafana::max_idle_conn,
+    'database/max_open_conn'      => $::grafana::max_open_conn,
     'paths/data'                  => $data_dir,
     'paths/logs'                  => $log_dir,
     'paths/plugins'               => $plugins_dir,
@@ -96,7 +100,7 @@ class grafana::config {
     'grafana_net/url'             => $::grafana::url,
   })
 
-  $config.each |$setting,$value| {
+  $config.each |String $setting, Any $value| {
     grafana_ini_setting { $setting:
       value => $value,
     }

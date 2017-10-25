@@ -25,8 +25,6 @@ describe 'grafana' do
         facts
       end
 
-      it { should contain_anchor('grafana::begin') }
-      it { should contain_anchor('grafana::end') }
       it { should contain_class('grafana') }
       it { should contain_class('grafana::config') }
       it { should contain_class('grafana::install') }
