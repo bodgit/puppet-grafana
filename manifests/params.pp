@@ -19,7 +19,7 @@ class grafana::params {
       $plugins_dir        = "${data_dir}/plugins"
       $restart_on_upgrade = false
       $service_name       = 'grafana-server'
-      $url                = 'https://grafana.net'
+      $url                = 'https://grafana.com'
       $user               = 'grafana'
     }
     default: {

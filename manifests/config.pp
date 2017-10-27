@@ -97,6 +97,7 @@ class grafana::config {
     'security/secret_key'         => $::grafana::secret_key,
     'users/allow_sign_up'         => $::grafana::allow_sign_up,
     'users/allow_org_create'      => $::grafana::allow_org_create,
+    'grafana_com/url'             => $::grafana::url,
     'grafana_net/url'             => $::grafana::url,
   })
 

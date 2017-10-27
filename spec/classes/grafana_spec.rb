@@ -36,7 +36,8 @@ describe 'grafana' do
       it { should contain_file('/var/lib/grafana/plugins') }
       it { should contain_file('/var/log/grafana') }
       it { should contain_grafana_ini_setting('analytics/check_for_updates').with_value('true') }
-      it { should contain_grafana_ini_setting('grafana_net/url').with_value('https://grafana.net') }
+      it { should contain_grafana_ini_setting('grafana_com/url').with_value('https://grafana.com') }
+      it { should contain_grafana_ini_setting('grafana_net/url').with_value('https://grafana.com') }
       it { should contain_grafana_ini_setting('paths/data').with_value('/var/lib/grafana') }
       it { should contain_grafana_ini_setting('paths/logs').with_value('/var/log/grafana') }
       it { should contain_grafana_ini_setting('paths/plugins').with_value('/var/lib/grafana/plugins') }
