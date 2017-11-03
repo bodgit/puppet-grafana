@@ -6,6 +6,11 @@ describe 'grafana' do
     {
       :admin_password => 'admin',
       :secret_key     => 'abc123',
+      :database       => {
+        :type     => 'mysql',
+        :host     => ['localhost', 3306],
+        :ssl_mode => true,
+      },
     }
   end
 
@@ -36,6 +41,9 @@ describe 'grafana' do
       it { should contain_file('/var/lib/grafana/plugins') }
       it { should contain_file('/var/log/grafana') }
       it { should contain_grafana_ini_setting('analytics/check_for_updates').with_value('true') }
+      it { should contain_grafana_ini_setting('database/type').with_value('mysql') }
+      it { should contain_grafana_ini_setting('database/host').with_value('localhost:3306') }
+      it { should contain_grafana_ini_setting('database/ssl_mode').with_value('true') }
       it { should contain_grafana_ini_setting('grafana_com/url').with_value('https://grafana.com') }
       it { should contain_grafana_ini_setting('grafana_net/url').with_value('https://grafana.com') }
       it { should contain_grafana_ini_setting('paths/data').with_value('/var/lib/grafana') }

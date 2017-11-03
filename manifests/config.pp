@@ -99,6 +99,19 @@ class grafana::config {
     'users/allow_org_create'      => $::grafana::allow_org_create,
     'grafana_com/url'             => $::grafana::url,
     'grafana_net/url'             => $::grafana::url,
+  } + $::grafana::database ? {
+    undef   => {},
+    default => $::grafana::database.reduce({}) |Hash $memo, Tuple $value| {
+      $memo + {
+        "database/${value[0]}" => $value[0] ? {
+          'host'  => type($value[1]) ? {
+            Type[Tuple] => "${value[1][0]}:${value[1][1]}",
+            default     => $value[1],
+          },
+          default => $value[1],
+        }
+      }
+    }
   })
 
   $config.each |String $setting, Any $value| {
