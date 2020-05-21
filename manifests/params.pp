@@ -16,6 +16,10 @@ class grafana::params {
       $manage_repo        = true
       $max_open_files     = 10000
       $package_name       = 'grafana'
+      $pid_file_dir       = $::operatingsystemmajrelease ? {
+        '6'     => undef,
+        default => '/var/run/grafana',
+      }
       $plugins_dir        = "${data_dir}/plugins"
       $restart_on_upgrade = false
       $service_name       = 'grafana-server'
