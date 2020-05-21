@@ -5,11 +5,12 @@ class grafana::install {
     case $::osfamily {
       'RedHat': {
         yumrepo { 'grafana':
-          baseurl       => "https://packagecloud.io/grafana/stable/el/${::operatingsystemmajrelease}/\$basearch",
+          baseurl       => 'https://packages.grafana.com/oss/rpm/',
+          descr         => 'grafana',
           repo_gpgcheck => true,
           enabled       => true,
           gpgcheck      => true,
-          gpgkey        => 'https://packagecloud.io/gpg.key https://grafanarel.s3.amazonaws.com/RPM-GPG-KEY-grafana',
+          gpgkey        => 'https://packages.grafana.com/gpg.key',
           sslverify     => true,
           before        => Package[$::grafana::package_name],
         }
